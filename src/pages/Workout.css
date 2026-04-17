@@ -1,0 +1,65 @@
+.workout-section {
+  padding: 50px 30px;
+  background-color: white;
+  text-align: center;
+}
+
+.workout-section h2 {
+  margin-bottom: 30px;
+  color: #1a1a1a;
+}
+
+.workout-controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.workout-controls select {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid #F5620A;
+  border-radius: 8px;
+  background: white;
+}
+
+.workout-controls button {
+  background-color: #F5620A;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.plan-output {
+  background-color: #f9f9f9;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: left;
+}
+
+.plan-output h3 {
+  color: #F5620A;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.plan-output ul {
+  list-style: none;
+  padding: 0;
+}
+
+.plan-output li {
+  padding: 10px;
+  margin: 5px 0;
+  background: white;
+  border-radius: 8px;
+  border-left: 4px solid #F5620A;
+}
