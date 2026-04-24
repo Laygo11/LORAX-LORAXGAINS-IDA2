@@ -1,65 +1,195 @@
-.workout-section {
-  padding: 50px 30px;
-  background-color: white;
-  text-align: center;
-}
-
-.workout-section h2 {
-  margin-bottom: 30px;
-  color: #1a1a1a;
-}
-
-.workout-controls {
+.workout-container {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-bottom: 30px;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Panels */
+.left-panel,
+.right-panel {
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* Left side */
+.left-panel {
+  width: 250px;
+}
+
+.left-panel h3 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #aaa;
+}
+
+.left-panel label {
+  font-size: 13px;
+  color: #888;
+}
+
+/* Goal buttons */
+.goal-buttons {
+  display: flex;
   flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 20px;
 }
 
-.workout-controls select {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: 2px solid #F5620A;
-  border-radius: 8px;
-  background: white;
+.goal-buttons button {
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
 }
 
-.workout-controls button {
-  background-color: #F5620A;
-  color: white;
+.goal-buttons button.active {
+  background: #ff7a00;
   border: none;
-  padding: 10px 30px;
-  font-size: 16px;
+  color: black;
+}
+
+/* Generate button */
+.generate-btn {
+  width: 100%;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #444;
+  color: white;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.plan-output {
-  background-color: #f9f9f9;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 30px;
-  border-radius: 15px;
-  text-align: left;
+.generate-btn:hover {
+  background: #ff7a00;
+  color: black;
 }
 
-.plan-output h3 {
-  color: #F5620A;
-  margin-bottom: 20px;
-  text-align: center;
+/* Right side */
+.right-panel {
+  flex: 1;
 }
 
-.plan-output ul {
+.right-panel h2 {
+  margin-bottom: 15px;
+}
+
+/* Plan list */
+.plan-list {
   list-style: none;
   padding: 0;
 }
 
-.plan-output li {
+.plan-list li {
+  display: flex;
+  align-items: center;
+  background: #222;
+  border: 1px solid #333;
   padding: 10px;
-  margin: 5px 0;
-  background: white;
+  margin-bottom: 10px;
   border-radius: 8px;
-  border-left: 4px solid #F5620A;
+  color: #ff7a00
+}
+
+.plan-list .index {
+  width: 25px;
+  height: 25px;
+  background: #333;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 25px;
+  margin-right: 10px;
+  font-size: 12px;
+  color: #ff7a00;
+}
+
+.plan-list .exercise {
+  flex: 1;
+}
+
+/* Placeholder */
+.placeholder {
+  color: #ff7a00;
+}
+/* Section labels */
+.left-panel label {
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+}
+
+/* Pill group (shared style) */
+.pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Pills */
+.pill-group button {
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Active pill */
+.pill-group button.active {
+  background: #ff7a00;
+  color: black;
+  border: none;
+}
+
+/* Right panel tag (like "Core", "Upper") */
+.tag {
+  background: #ff7a00;
+  color: black;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+}
+/* Day tabs */
+.day-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.day-tabs button {
+  background: #222;
+  border: 1px solid #444;
+  color: #ccc;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.day-tabs button.active {
+  background: #ff7a00;
+  color: black;
+  border: none;
+}
+/* Colored tags */
+.tag.upper { background: #ff7a00; color: black; }
+.tag.lower { background: #ffa94d; color: black; }
+.tag.core { background: #ffd43b; color: black; }
+.tag.cardio { background: #ff4d4d; color: white; }
+
+/* Smooth hover */
+.plan-list li {
+  transition: 0.2s;
+}
+
+.plan-list li:hover {
+  background: #2a2a2a;
+  transform: scale(1.01);
 }
