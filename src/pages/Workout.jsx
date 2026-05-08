@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Workout.css'
 
 export default function Workout() {
@@ -8,8 +8,50 @@ export default function Workout() {
   const [level, setLevel] = useState('beginner')
   const [plan, setPlan] = useState([])
   const [activeDay, setActiveDay] = useState(0)
+  const [profile, setProfile] = useState(null)
 
-  // Categorized exercises
+
+useEffect(() => {
+  const saved = localStorage.getItem("fitnessProfile")
+
+  if (!saved) return
+
+  const data = JSON.parse(saved)
+
+  setProfile(data)
+
+  // Goal mapping
+  if (data.goal === "Weight Loss") setGoal("lose")
+  if (data.goal === "Gain Muscle") setGoal("build")
+  if (data.goal === "Stay Active") setGoal("active")
+
+  // Days
+  if (data.days === "1-2") setDays(2)
+  if (data.days === "3-4") setDays(4)
+  if (data.days === "5+") setDays(5)
+
+  // Level
+  if (data.level) {
+    setLevel(data.level.toLowerCase())
+  }
+
+  // Equipment
+  if (data.location === "Gym") setEquipment("gym")
+  if (data.location === "Home") setEquipment("none")
+
+}, [])
+useEffect(() => {
+  const hasSurvey = localStorage.getItem("fitnessProfile")
+
+  if (!hasSurvey) return
+
+  const timer = setTimeout(() => {
+    generatePlan()
+  }, 50)
+
+  return () => clearTimeout(timer)
+}, [goal, days, level, equipment])
+
   const exercisePool = {
     upper: {
       none: ['Push-ups', 'Pike Push-ups', 'Diamond Push-ups'],
@@ -35,47 +77,44 @@ export default function Workout() {
 
   const getReps = () => {
     if (level === 'beginner') return '3 x 10'
-    if (level === 'intermediate') return '3 x 15'
+    if (level === 'intermediate') return '3 x 12'
     return '4 x 12'
+  }
+
+  const pickRandom = (category, count) => {
+    const list = [...exercisePool[category][equipment]]
+    return list.sort(() => Math.random() - 0.5).slice(0, count)
+  }
+
+  const getType = (ex) => {
+    if (exercisePool.upper[equipment].includes(ex)) return 'Upper'
+    if (exercisePool.lower[equipment].includes(ex)) return 'Lower'
+    if (exercisePool.core[equipment].includes(ex)) return 'Core'
+    return 'Cardio'
   }
 
   const generatePlan = () => {
     const newPlan = []
 
     for (let d = 0; d < days; d++) {
-      let day = []
-
-      const pick = (category, count) => {
-        const list = exercisePool[category][equipment]
-        return list.sort(() => 0.5 - Math.random()).slice(0, count)
-      }
-
-      // Balanced workout per day
-      day = [
-        ...pick('upper', 2),
-        ...pick('lower', 2),
-        ...pick('core', 1)
+      let day = [
+        ...pickRandom('upper', 2),
+        ...pickRandom('lower', 2),
+        ...pickRandom('core', 1)
       ]
 
-      // Add cardio if goal is lose weight
       if (goal === 'lose') {
-        day.push(...pick('cardio', 1))
+        day.push(...pickRandom('cardio', 1))
       }
 
-      // Build muscle = more strength
       if (goal === 'build') {
-        day.push(...pick('upper', 1))
+        day.push(...pickRandom('upper', 1))
       }
 
-      // Format
       day = day.map(ex => ({
         name: ex,
         reps: getReps(),
-        type:
-          exercisePool.upper[equipment].includes(ex) ? 'Upper' :
-          exercisePool.lower[equipment].includes(ex) ? 'Lower' :
-          exercisePool.core[equipment].includes(ex) ? 'Core' :
-          'Cardio'
+        type: getType(ex)
       }))
 
       newPlan.push(day)
@@ -85,10 +124,10 @@ export default function Workout() {
     setActiveDay(0)
   }
 
-  return (
-    <div className="workout-container">
 
-      {/* LEFT PANEL */}
+  return (
+    <div id="workout" className="workout-container">
+
       <div className="left-panel">
         <h3>CUSTOMIZE YOUR PLAN</h3>
 
@@ -127,7 +166,6 @@ export default function Workout() {
         </button>
       </div>
 
-      {/* RIGHT PANEL */}
       <div className="right-panel">
         <h2>{days}-Day Training Plan</h2>
 
@@ -160,7 +198,17 @@ export default function Workout() {
         ) : (
           <p className="placeholder">Generate your workout plan.</p>
         )}
+           <div className="stats-box">
+  <h3>Your Fitness Profile</h3>
+
+  <p><strong>Goal:</strong> {profile?.goal || "Not set"}</p>
+  <p><strong>Level:</strong> {profile?.level || "Not set"}</p>
+  <p><strong>Weight:</strong> {profile?.weight ? profile.weight + " kg" : "Not set"}</p>
+  <p><strong>Height:</strong> {profile?.height ? profile.height + " cm" : "Not set"}</p>
+  <p><strong>BMI:</strong> {profile?.bmi || "Not calculated"}</p>
+</div>
       </div>
+
     </div>
   )
 }
