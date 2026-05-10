@@ -1,3 +1,4 @@
+/* NAVBAR CONTAINER */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -7,29 +8,56 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  border-bottom: 1px solid #2a2a2a;
 }
 
-.logo {
-  font-size: 24px;
+/* LOGO */
+.logo a {
+  font-size: 22px;
   font-weight: bold;
   color: #F5620A;
+  text-decoration: none;
+  transition: 0.2s;
 }
 
+.logo a:hover {
+  opacity: 0.8;
+}
+
+/* NAV LINKS */
 .nav-links {
   display: flex;
-  gap: 20px;
+  gap: 12px;
 }
 
+/* LINK BUTTON STYLE (cleaner than nested button) */
+.nav-links a {
+  text-decoration: none;
+}
+
+/* BUTTON STYLE */
 .nav-links button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 16px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 14px;
   cursor: pointer;
-  padding: 8px 16px;
-  transition: all 0.3s;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: all 0.2s;
 }
 
+/* HOVER EFFECT */
 .nav-links button:hover {
-  color: #F5620A;
+  background: #F5620A;
+  border-color: #F5620A;
+  color: black;
+  transform: translateY(-1px);
+}
+
+/* ACTIVE LOOK (optional later with NavLink) */
+.nav-links button.active {
+  background: #F5620A;
+  border-color: #F5620A;
+  color: black;
 }

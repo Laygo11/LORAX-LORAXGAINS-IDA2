@@ -1,0 +1,38 @@
+.about-container {
+  padding: 40px;
+  text-align: center;
+  background-color: #111;
+  color: white;
+  min-height: 100vh;
+}
+
+.about-container h1 {
+  color: orange;
+  margin-bottom: 20px;
+}
+
+.learning-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #1f1f1f;
+  border: 2px solid orange;
+  border-radius: 12px;
+  padding: 20px;
+  width: 300px;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px orange;
+}
+
+.card h2 {
+  color: orange;
+}

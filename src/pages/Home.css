@@ -93,13 +93,16 @@
 .feature {
   flex: 1;
   background: #111;
+  border: 1px solid #2a2a2a;
   padding: 20px;
   border-radius: 10px;
   transition: 0.2s;
 }
 
 .feature:hover {
-  background: #151515;
+  background: #1a1a1a;
+  border-color: #ff7a00;
+  transform: translateY(-2px);
 }
 
 .feature-icon {
@@ -116,4 +119,50 @@
   font-size: 13px;
   color: #aaa;
   margin-top: 5px;
+}
+/* SURVEY CTA CARD */
+.survey-card {
+  margin-top: 25px;
+  background: #121212;
+  border: 1px solid #2a2a2a;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 360px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: 0.2s;
+}
+
+.survey-card:hover {
+   background: #1a1a1a;
+  border-color: #ff7a00;
+  transform: translateY(-2px);
+}
+
+.survey-card h3 {
+  color: #ff7a00;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.survey-card p {
+  color: #aaa;
+  font-size: 13px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.survey-btn {
+  width: 100%;
+  padding: 10px;
+  background: #ff7a00;
+  border: none;
+  color: black;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.survey-btn:hover {
+  opacity: 0.85;
 }
