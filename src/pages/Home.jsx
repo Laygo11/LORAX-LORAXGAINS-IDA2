@@ -18,48 +18,42 @@ export default function Home() {
 
   const [showQuote, setShowQuote] = useState(false)
   const [quote, setQuote] = useState("")
-
   const [showSurvey, setShowSurvey] = useState(false)
 
   useEffect(() => {
 
-    // RANDOM QUOTE
     const randomQuote =
       quotes[Math.floor(Math.random() * quotes.length)]
 
     setQuote(randomQuote)
 
-    // SHOW QUOTE
     setTimeout(() => {
       setShowQuote(true)
     }, 300)
 
-    // HIDE QUOTE
     setTimeout(() => {
       setShowQuote(false)
     }, 5000)
 
-    // CHECK IF SURVEY WAS COMPLETED
     const surveyCompleted =
       localStorage.getItem("surveyCompleted")
 
-    // IF NOT COMPLETED, SHOW POPUP
     if (!surveyCompleted) {
-
       setTimeout(() => {
         setShowSurvey(true)
       }, 1000)
-
     }
 
   }, [])
 
-
-  // GO TO SURVEY PAGE
   const startSurvey = () => {
-
     navigate("/survey")
+  }
 
+  // ✅ RESET SURVEY FUNCTION
+  const resetSurvey = () => {
+    localStorage.removeItem("surveyCompleted")
+    setShowSurvey(true)
   }
 
   return (
@@ -95,6 +89,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* HERO SECTION */}
       <div className="hero">
 
         <h1>
@@ -125,59 +120,50 @@ export default function Home() {
 
         </div>
 
+        {/* ✅ RESET BUTTON (MAIN PAGE) */}
+        <button className="reset-btn" onClick={resetSurvey}>
+          Reset Survey
+        </button>
+
       </div>
 
+      {/* FEATURES */}
       <div className="features">
 
         <div className="feature">
-
           <div className="feature-icon">🏋️</div>
-
           <h3>Workout Generator</h3>
-
           <p>Pick your goal, get a plan instantly.</p>
-
           <button
             className="survey-btn"
             onClick={() => navigate("/workout")}
           >
             Check Out Workout Generator →
           </button>
-
         </div>
 
         <div className="feature">
-
           <div className="feature-icon">🥗</div>
-
           <h3>Food Lookup</h3>
-
           <p>See calories, protein, carbs for meals.</p>
-
           <button
             className="survey-btn"
-            onClick={() => navigate("/ingradients")}
+            onClick={() => navigate("/ingredients")}
           >
             Check Out Food Lookup →
           </button>
-
         </div>
 
         <div className="feature">
-
           <div className="feature-icon">🎓</div>
-
           <h3>100% Free</h3>
-
           <p>No subscription. Just results.</p>
-
           <button
             className="survey-btn"
             onClick={() => navigate("/about")}
           >
             Learn More →
           </button>
-
         </div>
 
       </div>
