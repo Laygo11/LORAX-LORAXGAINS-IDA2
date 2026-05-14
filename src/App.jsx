@@ -1,5 +1,7 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
+
 import Navbar from './components/Navbar'
+import NavforSurv from './components/NavforSurv'
 
 import Home from './pages/Home'
 import Workout from './pages/Workout'
@@ -8,9 +10,14 @@ import Survey from './pages/Survey'
 import About from "./pages/About"
 
 function App() {
+  const location = useLocation()
+
+  const isSurvey = location.pathname === "/survey"
+
   return (
     <div>
-      <Navbar />
+
+      {isSurvey ? <NavforSurv /> : <Navbar />}
 
       <Routes>
         <Route path="/" element={<Home />} />

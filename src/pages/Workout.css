@@ -193,3 +193,86 @@
   background: #2a2a2a;
   transform: scale(1.01);
 }
+/* Locked day button */
+.day-tabs button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Warning popup */
+.warning-box {
+  background: #2a1a1a;
+  border: 1px solid #ff7a00;
+  color: #ff7a00;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Complete button */
+.complete-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background: #ff7a00;
+  border: none;
+  color: black;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.complete-btn:hover {
+  transform: scale(1.02);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* TIMER */
+.timer-box {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #222;
+  border: 1px solid #444;
+  color: #ff7a00;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* DISABLED COMPLETE BUTTON */
+.complete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* RESET BUTTON */
+.reset-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid #444;
+  color: #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.reset-btn:hover {
+  background: #ff4d4d;
+  border-color: #ff4d4d;
+  color: white;
+}

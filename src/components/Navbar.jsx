@@ -3,13 +3,13 @@ import { Link } from "react-router-dom"
 
 export default function Navbar() {
   return (
-    <div className="navbar">
+    <div className="app-navbar">
 
       <div className="logo">
-        <a href="/">🌿 LORAX GAINS</a>
+        <Link to="/">🌿 LORAX GAINS</Link>
       </div>
 
-      <div className="nav-links">
+      <div className="nav-actions">
 
         <Link to="/">
           <button>Home</button>
@@ -23,16 +23,12 @@ export default function Navbar() {
           <button>Food</button>
         </Link>
 
-        <Link to="/survey">
-          <button>Survey</button>
-        </Link>
-
         <Link to="/about">
           <button>About</button>
         </Link>
 
       </div>
-      
+
     </div>
   )
 }

@@ -36,3 +36,24 @@
 .card h2 {
   color: orange;
 }
+.video-card {
+  border: 2px solid #ff7a00;
+}
+
+.video-btn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #ff7a00;
+  border: none;
+  color: black;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.video-btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.05);
+}

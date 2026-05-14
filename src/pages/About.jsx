@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import "./About.css";
 
 function About() {
@@ -13,6 +12,7 @@ function About() {
       </p>
 
       <div className="learning-section">
+
         <div className="card">
           <h2>Beginner Training</h2>
           <p>
@@ -33,6 +33,26 @@ function About() {
             Master bodybuilding, cutting, bulking, and elite-level programs.
           </p>
         </div>
+
+        {/* NEW YOUTUBE CARD */}
+        <div className="card video-card">
+          <h2>🎥 More Tutorials</h2>
+          <p>
+            Click below to watch video tutorials for proper form,
+            workouts, and fitness guides.
+          </p>
+
+          <a
+            href="https://youtu.be/U9ENCvFf9yQ?si=XqG69S6ZsrdXKp2X"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="video-btn">
+              Watch on YouTube
+            </button>
+          </a>
+        </div>
+
       </div>
     </div>
   );
