@@ -1,6 +1,6 @@
 import './Home.css'
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 export default function Home() {
 
@@ -19,38 +19,49 @@ export default function Home() {
   const [showQuote, setShowQuote] = useState(false)
   const [quote, setQuote] = useState("")
   const [showSurvey, setShowSurvey] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+  // Progress popup state
+  const [showProgress, setShowProgress] = useState(false)
+  const progressTimerRef = useRef(null)
 
   useEffect(() => {
-
-    const randomQuote =
-      quotes[Math.floor(Math.random() * quotes.length)]
-
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
     setQuote(randomQuote)
+    setTimeout(() => setShowQuote(true), 300)
+    setTimeout(() => setShowQuote(false), 5000)
 
-    setTimeout(() => {
-      setShowQuote(true)
-    }, 300)
-
-    setTimeout(() => {
-      setShowQuote(false)
-    }, 5000)
-
-    const surveyCompleted =
-      localStorage.getItem("surveyCompleted")
-
+    const surveyCompleted = localStorage.getItem("surveyCompleted")
     if (!surveyCompleted) {
-      setTimeout(() => {
-        setShowSurvey(true)
-      }, 1000)
+      setTimeout(() => setShowSurvey(true), 1000)
     }
-
   }, [])
 
-  const startSurvey = () => {
-    navigate("/survey")
+  useEffect(() => {
+    const updateProgress = () => {
+      const unlockedDay = Number(localStorage.getItem("unlockedDay")) || 0
+      const profile = JSON.parse(localStorage.getItem("fitnessProfile"))
+      const totalDays =
+        profile?.days === "1-2" ? 2
+        : profile?.days === "3-4" ? 4
+        : profile?.days === "5+" ? 5
+        : 3
+      setProgress((unlockedDay / totalDays) * 100)
+    }
+    updateProgress()
+    window.addEventListener("storage", updateProgress)
+    return () => window.removeEventListener("storage", updateProgress)
+  }, [])
+
+  const handleProgressClick = () => {
+    if (showProgress) return
+    setShowProgress(true)
+    if (progressTimerRef.current) clearTimeout(progressTimerRef.current)
+    progressTimerRef.current = setTimeout(() => {
+      setShowProgress(false)
+    }, 10000)
   }
 
-  // ✅ RESET SURVEY FUNCTION
   const resetSurvey = () => {
     localStorage.removeItem("surveyCompleted")
     setShowSurvey(true)
@@ -67,64 +78,73 @@ export default function Home() {
       {/* SURVEY POPUP */}
       {showSurvey && (
         <div className="survey-popup-overlay">
-
           <div className="survey-popup">
-
             <h2>Get Your Personalized Plan</h2>
-
-            <p>
-              Answer a few quick questions so we can create your
-              workout and meal plan based on your goals.
-            </p>
-
-            <button
-              className="survey-btn"
-              onClick={startSurvey}
-            >
+            <p>Answer a few quick questions so we can create your workout and meal plan based on your goals.</p>
+            <button className="survey-btn" onClick={() => navigate("/survey")}>
               Start Fitness Survey →
             </button>
-
           </div>
-
         </div>
       )}
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <div className="hero">
+        <div className="hero-accent" />
 
-        <h1>
-          FREE WORKOUT PLANS <span>FOR STUDENTS</span>
+        <p className="eyebrow">Free · No Gym · No Excuses</p>
+
+        <h1 className="hero-title">
+          FREE WORKOUT<br />
+          <span className="hero-title-accent">FOR STUDENTS</span>
         </h1>
 
-        <p>
-          No gym? No problem. No money? Even better. It's all free.
+        <p className="hero-sub">
+          No gym? No problem. No money? Even better.<br />It's all free, forever.
         </p>
 
-        <div className="progress-card">
+        {/* PROGRESS SECTION — stacks button, popup, and reset vertically */}
+        <div className="progress-section">
 
-          <h4>This week’s goal</h4>
+          {/* PROGRESS BUTTON */}
+          <button className="progress-btn" onClick={handleProgressClick}>
+            <span className="progress-btn-label">THIS WEEK'S GOAL</span>
+            <span className="progress-btn-pct">{Math.round(progress)}%</span>
+            <span className="progress-btn-hint">tap to view →</span>
+          </button>
 
-          <div className="score">4 / 5</div>
+          {/* PROGRESS POPUP */}
+          {showProgress && (
+            <div className="progress-popup">
+              <div className="progress-popup-header">
+                <span className="progress-popup-title">WEEKLY PROGRESS</span>
+                <span className="progress-popup-pct">{Math.round(progress)}%</span>
+              </div>
+              <div className="progress-bar-track">
+                <div
+                  className="progress-bar-fill"
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+              <p className="progress-popup-sub">
+                {progress === 0
+                  ? "Start your first workout to track progress."
+                  : progress >= 100
+                  ? "Week complete! You crushed it 💪"
+                  : `You're ${Math.round(progress)}% through your weekly plan. Keep pushing!`}
+              </p>
+              <div className="progress-popup-timer">
+                Closes in 10s
+              </div>
+            </div>
+          )}
 
-          <div className="bar">
-            <span style={{ width: '80%' }}></span>
-          </div>
-
-          <div className="bar">
-            <span style={{ width: '60%' }}></span>
-          </div>
-
-          <div className="bar">
-            <span style={{ width: '40%' }}></span>
-          </div>
+          {/* RESET BUTTON */}
+          <button className="reset-btn" onClick={resetSurvey}>
+            Reset Survey
+          </button>
 
         </div>
-
-        {/* ✅ RESET BUTTON (MAIN PAGE) */}
-        <button className="reset-btn" onClick={resetSurvey}>
-          Reset Survey
-        </button>
-
       </div>
 
       {/* FEATURES */}
@@ -132,36 +152,30 @@ export default function Home() {
 
         <div className="feature">
           <div className="feature-icon">🏋️</div>
+          <span className="feature-badge">POPULAR</span>
           <h3>Workout Generator</h3>
-          <p>Pick your goal, get a plan instantly.</p>
-          <button
-            className="survey-btn"
-            onClick={() => navigate("/workout")}
-          >
+          <p>Pick your goal, get a plan instantly. No gym required.</p>
+          <button className="survey-btn" onClick={() => navigate("/workout")}>
             Check Out Workout Generator →
           </button>
         </div>
 
         <div className="feature">
           <div className="feature-icon">🥗</div>
+          <span className="feature-badge feature-badge--mid">NUTRITION</span>
           <h3>Food Lookup</h3>
-          <p>See calories, protein, carbs for meals.</p>
-          <button
-            className="survey-btn"
-            onClick={() => navigate("/ingredients")}
-          >
+          <p>See calories, protein, and carbs for any meal you eat.</p>
+          <button className="survey-btn" onClick={() => navigate("/ingredients")}>
             Check Out Food Lookup →
           </button>
         </div>
 
         <div className="feature">
           <div className="feature-icon">🎓</div>
+          <span className="feature-badge feature-badge--gold">FREE</span>
           <h3>100% Free</h3>
-          <p>No subscription. Just results.</p>
-          <button
-            className="survey-btn"
-            onClick={() => navigate("/about")}
-          >
+          <p>No subscription. No paywall. Just results and discipline.</p>
+          <button className="survey-btn" onClick={() => navigate("/about")}>
             Learn More →
           </button>
         </div>

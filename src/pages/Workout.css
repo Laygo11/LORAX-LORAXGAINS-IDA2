@@ -1,278 +1,677 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500&display=swap');
+
+/* ───────── ROOT ───────── */
 .workout-container {
   display: flex;
-  gap: 20px;
-  padding: 20px;
+  gap: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  background: #0a0a0a;
+  color: #f0f0f0;
+  min-height: 100vh;
 }
 
-/* Panels */
-.left-panel,
-.right-panel {
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
-  padding: 20px;
-}
-
-/* Left side */
+/* ───────── LEFT PANEL ───────── */
 .left-panel {
-  width: 250px;
+  width: 280px;
+  flex-shrink: 0;
+  background: linear-gradient(160deg, #1a0d00 0%, #0d0d0d 70%);
+  border-right: 1px solid #3a1e00;
+  padding: 50px 30px;
+  position: relative;
+}
+
+.left-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #ff6b00;
 }
 
 .left-panel h3 {
-  margin-bottom: 15px;
-  font-size: 16px;
-  color: #aaa;
-}
-
-.left-panel label {
   font-size: 13px;
-  color: #888;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ff6b00;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
-/* Goal buttons */
-.goal-buttons {
+/* ───────── TIMER BOX ───────── */
+.timer-box {
+  background: #111;
+  border: 1px solid #3a1e00;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #ff6b00;
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+/* ───────── LABELS ───────── */
+.left-panel label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #555;
+  font-weight: 700;
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+
+/* ───────── PILL GROUP ───────── */
+.pill-group {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 10px 0 20px;
 }
 
-.goal-buttons button {
+.pill-group button {
   background: transparent;
-  border: 1px solid #444;
-  color: #ccc;
-  padding: 6px 10px;
-  border-radius: 20px;
+  border: 1px solid #2a2a2a;
+  color: #888;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   cursor: pointer;
-  font-size: 12px;
+  transition: 0.2s;
 }
 
-.goal-buttons button.active {
-  background: #ff7a00;
-  border: none;
+.pill-group button:hover {
+  border-color: #ff6b00;
+  color: #ff6b00;
+}
+
+.pill-group button.active {
+  background: #ff6b00;
+  border-color: #ff6b00;
   color: black;
 }
 
-/* Generate button */
+/* ───────── GENERATE / CUSTOMIZE BUTTONS ───────── */
 .generate-btn {
   width: 100%;
-  padding: 10px;
-  background: #222;
-  border: 1px solid #444;
-  color: white;
-  border-radius: 8px;
+  margin-top: 20px;
+  padding: 13px;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  color: #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: 0.25s;
 }
 
 .generate-btn:hover {
-  background: #ff7a00;
+  background: #ff6b00;
+  border-color: #ff6b00;
   color: black;
 }
 
-/* Right side */
+.generate-btn.customize-active {
+  background: #ff6b00;
+  border-color: #ff6b00;
+  color: black;
+}
+
+/* ───────── CUSTOMIZE HINT ───────── */
+.customize-hint {
+  margin-top: 14px;
+  font-size: 12px;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+  line-height: 1.6;
+  border-top: 1px solid #1e1e1e;
+  padding-top: 14px;
+}
+
+/* ───────── RIGHT PANEL ───────── */
 .right-panel {
   flex: 1;
+  padding: 50px 50px;
+  background: #0a0a0a;
 }
 
 .right-panel h2 {
-  margin-bottom: 15px;
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* Plan list */
+/* ───────── CUSTOMIZE BADGE ───────── */
+.customize-badge {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: #ff6b00;
+  color: black;
+  padding: 5px 12px;
+  border-radius: 6px;
+}
+
+/* ───────── DAY TABS ───────── */
+.day-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.day-tabs button {
+  background: #111;
+  border: 1px solid #222;
+  color: #888;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.day-tabs button:hover {
+  border-color: #ff6b00;
+  color: #ff6b00;
+}
+
+.day-tabs button.active {
+  background: #ff6b00;
+  border-color: #ff6b00;
+  color: black;
+}
+
+.day-tabs button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ───────── WARNING BOX ───────── */
+.warning-box {
+  background: #1a0d00;
+  border: 1px solid #ff6b00;
+  color: #ff6b00;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  font-family: 'Barlow', sans-serif;
+  animation: fadeSlideIn 0.3s ease;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ───────── PLAN LIST ───────── */
 .plan-list {
   list-style: none;
   padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .plan-list li {
   display: flex;
   align-items: center;
-  background: #222;
-  border: 1px solid #333;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  color: #ff7a00
-}
-
-.plan-list .index {
-  width: 25px;
-  height: 25px;
-  background: #333;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 25px;
-  margin-right: 10px;
-  font-size: 12px;
-  color: #ff7a00;
-}
-
-.plan-list .exercise {
-  flex: 1;
-}
-
-/* Placeholder */
-.placeholder {
-  color: #ff7a00;
-}
-/* Section labels */
-.left-panel label {
-  display: block;
-  margin-top: 15px;
-  font-size: 12px;
-  color: #888;
-}
-
-/* Pill group (shared style) */
-.pill-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-/* Pills */
-.pill-group button {
-  background: transparent;
-  border: 1px solid #444;
-  color: #ccc;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-/* Active pill */
-.pill-group button.active {
-  background: #ff7a00;
-  color: black;
-  border: none;
-}
-
-/* Right panel tag (like "Core", "Upper") */
-.tag {
-  background: #ff7a00;
-  color: black;
-  font-size: 11px;
-  padding: 3px 8px;
+  gap: 12px;
+  background: #111;
+  border: 1px solid #1e1e1e;
   border-radius: 10px;
-}
-/* Day tabs */
-.day-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.day-tabs button {
-  background: #222;
-  border: 1px solid #444;
-  color: #ccc;
-  padding: 6px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.day-tabs button.active {
-  background: #ff7a00;
-  color: black;
-  border: none;
-}
-/* Colored tags */
-.tag.upper { background: #ff7a00; color: black; }
-.tag.lower { background: #ffa94d; color: black; }
-.tag.core { background: #ffd43b; color: black; }
-.tag.cardio { background: #ff4d4d; color: white; }
-
-/* Smooth hover */
-.plan-list li {
+  padding: 14px 16px;
   transition: 0.2s;
+  position: relative;
+  flex-wrap: wrap;
 }
 
 .plan-list li:hover {
-  background: #2a2a2a;
-  transform: scale(1.01);
-}
-/* Locked day button */
-.day-tabs button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+  border-color: #3a1e00;
+  background: #131313;
 }
 
-/* Warning popup */
-.warning-box {
-  background: #2a1a1a;
-  border: 1px solid #ff7a00;
-  color: #ff7a00;
-  padding: 12px;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  animation: fadeIn 0.3s ease;
+.plan-list li.editable {
+  border-color: #ff6b0033;
+  background: #140d00;
 }
 
-/* Complete button */
-.complete-btn {
-  margin-top: 15px;
-  width: 100%;
-  padding: 10px;
-  background: #ff7a00;
-  border: none;
-  color: black;
+.plan-list li.editable:hover {
+  border-color: #ff6b0066;
+  transform: none;
+}
+
+/* ───────── INDEX CIRCLE ───────── */
+.plan-list .index {
+  width: 28px;
+  height: 28px;
+  background: #1e1e1e;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #ff6b00;
+  flex-shrink: 0;
+}
+
+/* ───────── EXERCISE EDIT GROUP ───────── */
+.exercise-edit-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  position: relative;
+}
+
+.exercise {
+  flex: 1;
+  color: #e0e0e0;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.exercise-reps {
+  font-size: 13px;
+  color: #555;
+  font-family: 'Barlow', sans-serif;
+  white-space: nowrap;
+}
+
+/* ───────── EDITABLE INPUT ───────── */
+.exercise-input-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.exercise-input {
+  flex: 1;
+  background: #0f0f0f;
+  border: 1px solid #ff6b0055;
+  color: #e0e0e0;
   border-radius: 8px;
+  padding: 8px 30px 8px 10px;
+  font-size: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  outline: none;
+  min-width: 0;
+}
+
+.exercise-input:focus {
+  border-color: #ff6b00;
+}
+
+.dropdown-toggle {
+  position: absolute;
+  right: 6px;
+  background: transparent;
+  border: none;
+  color: #ff6b00;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 16px;
+  padding: 2px 4px;
+  line-height: 1;
+}
+
+/* ───────── REPS INPUT ───────── */
+.reps-input {
+  width: 68px;
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  color: #999;
+  border-radius: 8px;
+  padding: 7px 6px;
+  font-size: 13px;
+  font-family: 'Barlow', sans-serif;
+  outline: none;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.reps-input:focus {
+  border-color: #ff6b00;
+  color: #f0f0f0;
+}
+
+/* ───────── EXERCISE DROPDOWN ───────── */
+.exercise-dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: #111;
+  border: 1px solid #ff6b0055;
+  border-radius: 10px;
+  z-index: 100;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+}
+
+.dropdown-section-label {
+  font-size: 10px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  padding: 10px 12px 6px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-size: 13px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #aaa;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.dropdown-item:hover {
+  background: #1a1a1a;
+  color: #ff6b00;
+}
+
+.dropdown-item.dropdown-custom {
+  color: #ff6b00;
+  border-top: 1px solid #1e1e1e;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.dropdown-empty {
+  padding: 12px;
+  font-size: 13px;
+  color: #444;
+  text-align: center;
+  font-family: 'Barlow', sans-serif;
+}
+
+.exercise-dropdown::-webkit-scrollbar { width: 3px; }
+.exercise-dropdown::-webkit-scrollbar-track { background: #111; }
+.exercise-dropdown::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+/* ───────── TAGS ───────── */
+.tag {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.tag.upper  { background: #ff6b00; color: black; }
+.tag.lower  { background: #ff9a3c; color: black; }
+.tag.core   { background: #ffd43b; color: black; }
+.tag.cardio { background: #ff3c3c; color: white; }
+.tag.small  { font-size: 10px; padding: 3px 8px; }
+
+/* ───────── EXERCISE TIMER ───────── */
+.exercise-timer {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ff6b00;
+  min-width: 42px;
+  text-align: right;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+
+/* ───────── BUTTON GROUP ───────── */
+.exercise-btn-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.start-btn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #2a2a2a;
+  cursor: pointer;
+  background: #1a1a1a;
+  color: #ccc;
+  font-size: 13px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: 0.2s;
 }
 
-.complete-btn:hover {
-  transform: scale(1.02);
+.start-btn:hover {
+  background: #ff6b00;
+  border-color: #ff6b00;
+  color: black;
 }
 
-/* Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* TIMER */
-.timer-box {
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 8px;
-  background: #222;
-  border: 1px solid #444;
-  color: #ff7a00;
-  text-align: center;
-  font-weight: bold;
-}
-
-/* DISABLED COMPLETE BUTTON */
-.complete-btn:disabled {
-  opacity: 0.5;
+.start-btn:disabled {
+  opacity: 0.35;
   cursor: not-allowed;
 }
-/* RESET BUTTON */
-.reset-btn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-  background: transparent;
-  border: 1px solid #444;
-  color: #ccc;
+
+.stop-btn {
+  padding: 7px 12px;
   border-radius: 8px;
+  border: 1px solid #3a1010;
   cursor: pointer;
+  background: #1a0a0a;
+  color: #ff4444;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.stop-btn:hover {
+  background: #ff4444;
+  border-color: #ff4444;
+  color: white;
+}
+
+/* ───────── REMOVE BUTTON ───────── */
+.remove-btn {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: #444;
+  border-radius: 6px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  flex-shrink: 0;
+  transition: 0.15s;
+  padding: 0;
+}
+
+.remove-btn:hover {
+  background: #1a0a0a;
+  border-color: #ff4444;
+  color: #ff4444;
+}
+
+/* ───────── ADD EXERCISE BUTTON ───────── */
+.add-exercise-btn {
+  width: 100%;
+  padding: 11px;
+  margin-bottom: 16px;
+  background: transparent;
+  border: 1px dashed #3a1e00;
+  color: #ff6b00;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: 0.2s;
+}
+
+.add-exercise-btn:hover {
+  background: #1a0d00;
+  border-color: #ff6b00;
+}
+
+/* ───────── COMPLETE BUTTON ───────── */
+.complete-btn {
+  width: 100%;
+  padding: 16px;
+  background: #ff6b00;
+  border: none;
+  color: black;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: 0.25s;
+  margin-top: 4px;
+}
+
+.complete-btn:hover {
+  background: #ff8500;
+  transform: translateY(-2px);
+}
+
+.complete-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ───────── RESET BUTTON ───────── */
+.reset-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 13px;
+  background: transparent;
+  border: 1px solid #222;
+  color: #666;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   transition: 0.2s;
 }
 
 .reset-btn:hover {
-  background: #ff4d4d;
-  border-color: #ff4d4d;
-  color: white;
+  border-color: #ff4444;
+  color: #ff4444;
+}
+
+/* ───────── STATS BOX ───────── */
+.stats-box {
+  margin-top: 24px;
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  padding: 24px 22px;
+}
+
+.stats-box h3 {
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #ff6b00;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.stats-box p {
+  font-size: 16px;
+  color: #999;
+  font-family: 'Barlow', sans-serif;
+  margin: 8px 0;
+  display: flex;
+  gap: 8px;
+}
+
+.stats-box strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ff6b00;
+  min-width: 70px;
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 900px) {
+  .workout-container {
+    flex-direction: column;
+  }
+
+  .left-panel {
+    width: 100%;
+    padding: 36px 24px;
+    border-right: none;
+    border-bottom: 1px solid #3a1e00;
+  }
+
+  .left-panel::before {
+    width: 100%;
+    height: 4px;
+    top: 0;
+    left: 0;
+  }
+
+  .right-panel {
+    padding: 36px 24px;
+  }
+
+  .right-panel h2 {
+    font-size: 36px;
+  }
 }

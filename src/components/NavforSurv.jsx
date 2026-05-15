@@ -1,20 +1,24 @@
 import './Navbar.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Navbar() {
+  const navigate = useNavigate()
+
   return (
-    <div className="app-navbar">
+    <nav className="app-navbar">
+
+      <div className="navbar-accent" />
 
       <div className="logo">
-        <a href="/">🌿 LORAX GAINS</a>
+        <Link to="/">🌿 LORAX GAINS</Link>
       </div>
 
       <div className="nav-actions">
-        <Link to="/">
-          <button className="back-btn">⬅ Back</button>
-        </Link>
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ← Back
+        </button>
       </div>
 
-    </div>
+    </nav>
   )
 }

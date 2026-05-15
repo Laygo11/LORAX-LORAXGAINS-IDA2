@@ -8,6 +8,7 @@ import Workout from './pages/Workout'
 import Ingredients from './pages/Ingredients'
 import Survey from './pages/Survey'
 import About from "./pages/About"
+import Login from './pages/Login'
 
 function App() {
   const location = useLocation()
@@ -25,6 +26,7 @@ function App() {
         <Route path="/workout" element={<Workout />} />
         <Route path="/ingredients" element={<Ingredients />} />
         <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
 
     </div>

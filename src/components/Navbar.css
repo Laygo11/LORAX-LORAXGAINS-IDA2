@@ -80,3 +80,92 @@
   color: black;
   transform: translateY(-1px);
 }
+.login-btn {
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: #F5620A;
+  color: black;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(245, 98, 10, 0.3);
+}
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500&display=swap');
+
+/* ───────── NAVBAR ───────── */
+.app-navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  height: 64px;
+  background: #0d0d0d;
+  border-bottom: 1px solid #1e1e1e;
+  font-family: 'Barlow Condensed', sans-serif;
+  z-index: 100;
+}
+
+/* orange left accent stripe */
+.navbar-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #ff6b00;
+}
+
+/* ───────── LOGO ───────── */
+.logo a {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.logo a:hover {
+  color: #ff6b00;
+}
+
+/* ───────── BACK BUTTON ───────── */
+.back-btn {
+  padding: 9px 20px;
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: #888;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  border-color: #ff6b00;
+  color: #ff6b00;
+  background: #1a0d00;
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 600px) {
+  .app-navbar {
+    padding: 0 20px;
+  }
+
+  .logo a {
+    font-size: 18px;
+  }
+}

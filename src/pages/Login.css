@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Barlow:wght@400;500&display=swap');
+
+/* ───────── ROOT ───────── */
+.login-container {
+  font-family: 'Barlow Condensed', sans-serif;
+  background: #0a0a0a;
+  color: #f0f0f0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+}
+
+/* ───────── LEFT ACCENT STRIPE ───────── */
+.login-hero-accent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #ff6b00;
+  z-index: 10;
+}
+
+/* ───────── PANEL ───────── */
+.login-panel {
+  width: 100%;
+  max-width: 480px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  padding: 56px 48px;
+  position: relative;
+}
+
+/* top orange rule inside the card */
+.login-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 48px;
+  right: 48px;
+  height: 3px;
+  background: #ff6b00;
+  border-radius: 0 0 4px 4px;
+}
+
+/* ───────── EYEBROW ───────── */
+.login-eyebrow {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ff6b00;
+  font-weight: 700;
+  margin: 0 0 14px;
+}
+
+/* ───────── TITLE ───────── */
+.login-title {
+  font-size: clamp(42px, 8vw, 64px);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.login-title-accent {
+  color: #ff6b00;
+  display: block;
+}
+
+/* ───────── SUBTITLE ───────── */
+.login-subtitle {
+  font-size: 16px;
+  color: #777;
+  font-family: 'Barlow', sans-serif;
+  line-height: 1.6;
+  margin: 0 0 36px;
+  border-bottom: 1px solid #1e1e1e;
+  padding-bottom: 28px;
+}
+
+/* ───────── FORM ───────── */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-field label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #555;
+  font-weight: 700;
+}
+
+.login-field input {
+  width: 100%;
+  padding: 14px 16px;
+  background: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  color: #f0f0f0;
+  font-size: 16px;
+  font-family: 'Barlow', sans-serif;
+  outline: none;
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.login-field input:focus {
+  border-color: #ff6b00;
+  background: #130d00;
+}
+
+.login-field input::placeholder {
+  color: #333;
+}
+
+/* ───────── ERROR ───────── */
+.login-error {
+  font-size: 13px;
+  color: #ff4444;
+  font-family: 'Barlow', sans-serif;
+  margin: -8px 0 0;
+  padding: 10px 14px;
+  background: #1a0a0a;
+  border: 1px solid #3a1010;
+  border-radius: 8px;
+}
+
+/* ───────── SUBMIT BUTTON ───────── */
+.login-submit-btn {
+  width: 100%;
+  padding: 16px;
+  background: #ff6b00;
+  border: none;
+  color: black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.25s;
+  margin-top: 6px;
+}
+
+.login-submit-btn:hover {
+  background: #ff8500;
+  transform: translateY(-2px);
+}
+
+.login-submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ───────── RESPONSIVE ───────── */
+@media (max-width: 560px) {
+  .login-panel {
+    padding: 40px 28px;
+  }
+
+  .login-panel::before {
+    left: 28px;
+    right: 28px;
+  }
+
+  .login-title {
+    font-size: 38px;
+  }
+}

@@ -1,7 +1,12 @@
 import './Navbar.css'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Navbar() {
+
+  const navigate = useNavigate()
+
+  const isLoggedIn = localStorage.getItem("loggedIn")
+
   return (
     <div className="app-navbar">
 
@@ -26,6 +31,15 @@ export default function Navbar() {
         <Link to="/about">
           <button>About</button>
         </Link>
+
+        {!isLoggedIn && (
+          <button
+            onClick={() => navigate("/login")}
+            style={{ marginLeft: "10px" }}
+          >
+            Login
+          </button>
+        )}
 
       </div>
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./About.css";
 
 const tiers = [
@@ -41,15 +42,15 @@ const tiers = [
 ];
 
 const contactMethods = [
-  { icon: "📧", title: "Email Us",  val: "support@loraxgains.com" },
+  { icon: "📧", title: "Email Us", val: "support@loraxgains.com" },
   { icon: "💬", title: "Live Chat", val: "Available Mon – Sat, 7 AM – 9 PM" },
-  { icon: "📍", title: "Studio",    val: "123 Iron Ave, Fitness City, FC 54321" },
+  { icon: "📍", title: "Studio", val: "123 Iron Ave, Fitness City, FC 54321" },
 ];
 
 const stats = [
   ["12K+", "Active Members"],
   ["350+", "Workout Programs"],
-  ["97%",  "Satisfaction Rate"],
+  ["97%", "Satisfaction Rate"],
   ["24/7", "Support"],
 ];
 
@@ -58,9 +59,14 @@ const ratingLabels = ["", "Poor", "Fair", "Good", "Great", "Excellent"];
 function TierCard({ tier }) {
   return (
     <div className="tier-card">
-      <span className={`tier-badge ${tier.badgeClass}`}>{tier.badge}</span>
+      <span className={`tier-badge ${tier.badgeClass}`}>
+        {tier.badge}
+      </span>
+
       <div className="tier-title">{tier.title}</div>
+
       <p className="tier-desc">{tier.desc}</p>
+
       <ul className="tier-features">
         {tier.features.map((f) => (
           <li key={f} className="tier-feature-item">
@@ -74,54 +80,111 @@ function TierCard({ tier }) {
 }
 
 export default function About() {
-  const [form, setForm]               = useState({ name: "", email: "", category: "", message: "" });
-  const [rating, setRating]           = useState(0);
+
+  const navigate = useNavigate();
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    category: "",
+    message: "",
+  });
+
+  const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const [submitted, setSubmitted]     = useState(false);
-  const [errors, setErrors]           = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
   const handleChange = (e) => {
-    setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
-    setErrors((p) => ({ ...p, [e.target.name]: "" }));
+    setForm((p) => ({
+      ...p,
+      [e.target.name]: e.target.value,
+    }));
+
+    setErrors((p) => ({
+      ...p,
+      [e.target.name]: "",
+    }));
   };
 
   const validate = () => {
     const errs = {};
-    if (!form.name.trim()) errs.name = "Name is required";
-    if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email)) errs.email = "Valid email required";
-    if (!form.message.trim()) errs.message = "Message is required";
+
+    if (!form.name.trim()) {
+      errs.name = "Name is required";
+    }
+
+    if (
+      !form.email.trim() ||
+      !/\S+@\S+\.\S+/.test(form.email)
+    ) {
+      errs.email = "Valid email required";
+    }
+
+    if (!form.message.trim()) {
+      errs.message = "Message is required";
+    }
+
     return errs;
   };
 
   const handleSubmit = () => {
     const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+
     setSubmitted(true);
   };
 
   const handleReset = () => {
     setSubmitted(false);
-    setForm({ name: "", email: "", category: "", message: "" });
+
+    setForm({
+      name: "",
+      email: "",
+      category: "",
+      message: "",
+    });
+
     setRating(0);
     setErrors({});
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedIn");
+    navigate("/");
   };
 
   return (
     <div className="about-root">
 
-      {/* ── HERO ── */}
+      {/* HERO */}
       <section className="about-hero">
+
         <div className="hero-accent" />
-        <p className="eyebrow">Since 2020 · Trusted by Athletes Worldwide</p>
+
+        <p className="eyebrow">
+          Since 2026 · Trusted by Athletes Worldwide
+        </p>
+
         <h1 className="hero-title">
           About
-          <span className="hero-title-accent">Lorax Gains</span>
+          <span className="hero-title-accent">
+            Lorax Gains
+          </span>
         </h1>
+
         <p className="hero-sub">
-          Your ultimate fitness partner — built for beginners chasing their first PR,
-          experienced athletes breaking plateaus, and professionals competing at the
-          highest level.
+          Your ultimate fitness partner — built for beginners
+          chasing their first PR, experienced athletes
+          breaking plateaus, and professionals competing
+          at the highest level.
         </p>
+
         <div className="stats-row">
           {stats.map(([num, label]) => (
             <div key={label} className="stat">
@@ -130,23 +193,30 @@ export default function About() {
             </div>
           ))}
         </div>
+
       </section>
 
-      {/* ── TRAINING TIERS ── */}
+      {/* TRAINING TIERS */}
       <section className="about-section">
+
         <div className="section-title">
           Training Programs
           <div className="section-line" />
         </div>
+
         <div className="tiers">
-          {tiers.map((t) => <TierCard key={t.title} tier={t} />)}
+          {tiers.map((t) => (
+            <TierCard key={t.title} tier={t} />
+          ))}
         </div>
+
       </section>
 
       <hr className="about-divider" />
 
-      {/* ── CONTACT / FEEDBACK ── */}
+      {/* CONTACT */}
       <section className="contact-section">
+
         <div className="section-title">
           Customer Service
           <div className="section-line" />
@@ -154,140 +224,326 @@ export default function About() {
 
         <div className="contact-grid">
 
-          {/* Left — contact info */}
+          {/* LEFT */}
           <div className="contact-info">
+
             <div>
+
               <h2 className="contact-title">
-                We're<br />
-                <span className="contact-title-accent">Here</span><br />
+                We're
+                <br />
+
+                <span className="contact-title-accent">
+                  Here
+                </span>
+
+                <br />
                 For You
               </h2>
+
               <p className="contact-subtitle">
-                Questions, feedback, or coaching inquiries — our team responds within
-                24 hours. Your progress is our priority.
+                Questions, feedback, or coaching inquiries —
+                our team responds within 24 hours.
+                Your progress is our priority.
               </p>
+
             </div>
+
             <div className="contact-method">
+
               {contactMethods.map((c) => (
                 <div key={c.title} className="contact-item">
-                  <span className="contact-icon">{c.icon}</span>
+
+                  <span className="contact-icon">
+                    {c.icon}
+                  </span>
+
                   <div>
-                    <div className="contact-item-title">{c.title}</div>
-                    <div className="contact-item-val">{c.val}</div>
+
+                    <div className="contact-item-title">
+                      {c.title}
+                    </div>
+
+                    <div className="contact-item-val">
+                      {c.val}
+                    </div>
+
                   </div>
+
                 </div>
               ))}
+
             </div>
+
           </div>
 
-          {/* Right — feedback form */}
+          {/* RIGHT */}
           <div>
+
             {submitted ? (
+
               <div className="success-box">
-                <div className="success-icon">✅</div>
-                <div className="success-title">Message Received!</div>
+
+                <div className="success-icon">
+                  ✅
+                </div>
+
+                <div className="success-title">
+                  Message Received!
+                </div>
+
                 <p className="success-sub">
-                  Thanks for reaching out. Our team will get back to you within 24 hours.
-                  Keep grinding — we've got your back.
+                  Thanks for reaching out.
+                  Our team will get back to you within 24 hours.
                 </p>
-                <button className="reset-btn" onClick={handleReset}>
+
+                <button
+                  className="reset-btn"
+                  onClick={handleReset}
+                >
                   Send Another
                 </button>
+
               </div>
+
             ) : (
+
               <div className="about-form">
 
-                {/* Name + Email row */}
+                {/* NAME + EMAIL */}
                 <div className="form-row">
+
                   <div className="form-group">
-                    <label className="form-label">Full Name</label>
+
+                    <label className="form-label">
+                      Full Name
+                    </label>
+
                     <input
-                      className={`form-input${errors.name ? " form-input--error" : ""}`}
+                      className={`form-input ${
+                        errors.name
+                          ? "form-input--error"
+                          : ""
+                      }`}
                       name="name"
                       value={form.name}
                       placeholder="John Doe"
                       onChange={handleChange}
                     />
-                    {errors.name && <span className="form-error">{errors.name}</span>}
+
+                    {errors.name && (
+                      <span className="form-error">
+                        {errors.name}
+                      </span>
+                    )}
+
                   </div>
+
                   <div className="form-group">
-                    <label className="form-label">Email</label>
+
+                    <label className="form-label">
+                      Email
+                    </label>
+
                     <input
-                      className={`form-input${errors.email ? " form-input--error" : ""}`}
+                      className={`form-input ${
+                        errors.email
+                          ? "form-input--error"
+                          : ""
+                      }`}
                       name="email"
                       type="email"
                       value={form.email}
                       placeholder="john@email.com"
                       onChange={handleChange}
                     />
-                    {errors.email && <span className="form-error">{errors.email}</span>}
+
+                    {errors.email && (
+                      <span className="form-error">
+                        {errors.email}
+                      </span>
+                    )}
+
                   </div>
+
                 </div>
 
-                {/* Category */}
+                {/* CATEGORY */}
                 <div className="form-group">
-                  <label className="form-label">Category</label>
+
+                  <label className="form-label">
+                    Category
+                  </label>
+
                   <select
                     className="form-select"
                     name="category"
                     value={form.category}
                     onChange={handleChange}
                   >
-                    <option value="">Select a topic…</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="training">Training Program Help</option>
-                    <option value="nutrition">Nutrition & Diet</option>
-                    <option value="billing">Billing & Subscription</option>
-                    <option value="feedback">Feedback & Suggestions</option>
-                    <option value="bug">Report an Issue</option>
+                    <option value="">
+                      Select a topic…
+                    </option>
+
+                    <option value="general">
+                      General Inquiry
+                    </option>
+
+                    <option value="training">
+                      Training Program Help
+                    </option>
+
+                    <option value="nutrition">
+                      Nutrition & Diet
+                    </option>
+
+                    <option value="billing">
+                      Billing & Subscription
+                    </option>
+
+                    <option value="feedback">
+                      Feedback & Suggestions
+                    </option>
+
+                    <option value="bug">
+                      Report an Issue
+                    </option>
+
                   </select>
+
                 </div>
 
-                {/* Star Rating */}
+                {/* STAR RATING */}
                 <div className="form-group">
-                  <label className="form-label">Rate Your Experience</label>
+
+                  <label className="form-label">
+                    Rate Your Experience
+                  </label>
+
                   <div className="rating-row">
+
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
                         key={star}
-                        className={`star-btn${star <= (hoverRating || rating) ? " star-btn--active" : ""}`}
-                        onMouseEnter={() => setHoverRating(star)}
-                        onMouseLeave={() => setHoverRating(0)}
+                        className={`star-btn ${
+                          star <=
+                          (hoverRating || rating)
+                            ? "star-btn--active"
+                            : ""
+                        }`}
+                        onMouseEnter={() =>
+                          setHoverRating(star)
+                        }
+                        onMouseLeave={() =>
+                          setHoverRating(0)
+                        }
                         onClick={() => setRating(star)}
-                        aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
                       >
                         ★
                       </button>
                     ))}
+
                     {rating > 0 && (
-                      <span className="rating-label">{ratingLabels[rating]}</span>
+                      <span className="rating-label">
+                        {ratingLabels[rating]}
+                      </span>
                     )}
+
                   </div>
+
                 </div>
 
-                {/* Message */}
+                {/* MESSAGE */}
                 <div className="form-group">
-                  <label className="form-label">Your Message</label>
+
+                  <label className="form-label">
+                    Your Message
+                  </label>
+
                   <textarea
-                    className={`form-textarea${errors.message ? " form-textarea--error" : ""}`}
+                    className={`form-textarea ${
+                      errors.message
+                        ? "form-textarea--error"
+                        : ""
+                    }`}
                     name="message"
                     value={form.message}
                     placeholder="Tell us how we can help you…"
                     onChange={handleChange}
                   />
-                  {errors.message && <span className="form-error">{errors.message}</span>}
+
+                  {errors.message && (
+                    <span className="form-error">
+                      {errors.message}
+                    </span>
+                  )}
+
                 </div>
 
-                <button className="submit-btn" onClick={handleSubmit}>
+                <button
+                  className="submit-btn"
+                  onClick={handleSubmit}
+                >
                   Send Message →
+                </button>
+
+                {/* LOGOUT BUTTON */}
+                <button
+                  className="logout-btn"
+                  onClick={() =>
+                    setShowLogoutPopup(true)
+                  }
+                >
+                  Logout
                 </button>
 
               </div>
             )}
+
           </div>
 
         </div>
+
       </section>
+
+      {/* LOGOUT POPUP */}
+      {showLogoutPopup && (
+
+        <div className="logout-overlay">
+
+          <div className="logout-popup">
+
+            <h2>Are you sure?</h2>
+
+            <p>
+              You will be logged out from your account.
+            </p>
+
+            <div className="logout-actions">
+
+              <button
+                className="yes-btn"
+                onClick={handleLogout}
+              >
+                Yes
+              </button>
+
+              <button
+                className="no-btn"
+                onClick={() =>
+                  setShowLogoutPopup(false)
+                }
+              >
+                No
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
+
     </div>
   );
 }
