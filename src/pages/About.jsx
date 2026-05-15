@@ -44,7 +44,7 @@ const tiers = [
 const contactMethods = [
   { icon: "📧", title: "Email Us", val: "support@loraxgains.com" },
   { icon: "💬", title: "Live Chat", val: "Available Mon – Sat, 7 AM – 9 PM" },
-  { icon: "📍", title: "Studio", val: "123 Iron Ave, Fitness City, FC 54321" },
+  { icon: "📍", title: "Studio", val: "123 Truffala Tree Forest, Truffala Valley, TV 54321" },
 ];
 
 const stats = [
